@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<script src="/media/static/static_jquery/js/jquery.js"></script>
+<script src="/media/static/bootstrap/js/bootstrap.js"></script>
+{% load bootstrap_themes %}
+{% bootstrap_styles theme='paper' type='css' %}
+{% block head %}
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'index' %}">TEST</a>
+    </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            {% if user.is_authenticated %}
+                <li><a href="#">#</a></li>
+                </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'logout' %}">{{ user }}:Выйти</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    </nav>
+{% endblock %}
+{% if user.is_authenticated %}
+{% block message %}
+{% endblock %}
+{% block search %}
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% else %}
+{% block auth %}
+    <div class="panel panel-default" style="width: 20%; margin-left: 40%">
+    <div class="text-center panel-body">Для доступа к сайту необходимо авторизоваться<br/>
+    <a href="{% url 'login' %}" class="btn btn-success">ТУТ</a>
+    </div>
+    </div>
+{% endblock %}
+{% endif %}
+{% block footer %}
+{% endblock %}
